@@ -1,0 +1,44 @@
+{% extends "base/consent.html" %}
+
+{% block body %}
+    <div class="main_div">
+        <noscript>
+            <h1>Warning: Javascript is not working on your browser</h1>
+            <p>The study will not work unless Javascript is enabled on your browser.</p>
+            <p>Please enable Javascript then refresh this page.<p>
+        </noscript>
+        <h1 class="text-center">We need your consent to proceed</h1>
+        <hr>
+        <div class="consent_div text-justify">
+{% block consent_text %}
+
+	<h3 class="text-center">Consent form</h3>
+	
+	<h5>Thank you for considering taking part in this study. If you would like to take part, please click below to indicate that you have read and understood the previous information and that you consent to following:</h5>
+
+	<h5>1) I consent to take part in the study.</h5>
+
+	<h5>2) I confirm that I have read and understood the participant information sheet.</h5>
+
+	<h5>3) I understand that my participation is voluntary and that I am free to withdraw at any time without giving a reason but that if I do so, I will be ineligible for compensation.</h5>
+
+	<h5>4) I understand that I can ask any questions by emailing Robin Watson [robin.o.watson@durham.ac.uk] (you will receive this address again at the end of the study).</h5>
+
+	<h5>5) I understand that the data collected in this study will be kept anonymously and securely but agree that it may be shared with other researchers and / or used as part of a later computer simulation.</h5>
+
+        <h5>Once you click "I agree" below you will automatically be added into the game</h5>
+
+{% endblock consent_text %}
+
+{% block consent_button %}
+    <button type="button" class="btn btn-primary btn-lg" onClick="dallinger.allowExit();dallinger.goToPage('waiting');" style="float: right;">I agree</button>
+{% endblock consent_button %}
+
+{% block reject_button %}
+     <button type="button" class="btn btn-danger btn-lg" onClick="self.close();" style="float: left;">I do not agree (exit HIT)
+     </button>
+{% endblock reject_button %}
+        </div>
+    </div>
+{% endblock %}
+

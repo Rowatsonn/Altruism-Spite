@@ -1,0 +1,44 @@
+{% extends "layout.html" %}
+
+{% block body %}
+  <div class = "container">
+      <div class = "row">
+         <div class = "col-md-12 text-center">
+            <h1 style="font-size: 53px">Part Two</h1>
+         </div>
+      </div>
+      <div class = "row" id = "Waiting" style = "display:none">
+        <div class = "col-md-12 text-center">
+          <h2 id = "Txt">Randomly assigning roles, please wait a moment...</h2>
+          <h3 id = "social" style = "display:none">To help you make your decision, you will also be shown information about the behaviour of previous participants</h3>
+        </div>
+      </div>
+      <div class = "row" id = Instructions>
+         <div class = "col-md-12 text-center">
+            <hr>
+            <p>In this part of the game, you or your partner will be given the chance to change the other player's score for a small cost.</p>
+            <p>One player will be randomly allocated to be the decider who will make this decision.</p>
+            <p>Once this decision is made, <strong>the game is over</strong>. The other player will not be able to respond to their score being changed.</p>
+            <hr>
+         </div>
+      </div>
+      <div class="row" id = "Allocate">
+         <div class="col-md-10"></div>
+         <div class="col-md-2">
+            <button type="button" class="btn btn-success btn-lg" onClick="allocatePartners(condition);">OK</button>
+         </div>
+      </div>
+      <div class="row" id = "Next" style = "display:none">
+         <div class="col-md-10"></div>
+         <div class="col-md-2">
+            <button type="button" class="btn btn-success btn-lg" onClick="dallinger.allowExit(); dallinger.goToPage('experiment2')">Next</button>
+         </div>
+      </div>
+   </div>
+{% endblock %}
+{% block scripts %}
+    <script>
+        condition = randomiseCondition();
+        dallinger.storage.set("Condition", condition);
+    </script>
+{% endblock %}

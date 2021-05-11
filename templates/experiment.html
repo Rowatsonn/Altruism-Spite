@@ -1,0 +1,49 @@
+{% extends "layout.html" %}
+
+{% block body %}
+   <div class="container">
+      <div class="row">
+         <div class="col-md-12 text-center">
+            <h1 style="font-size: 53px;">Part One</h1>
+         </div>
+      </div>
+      <div class = "row">
+         <div class = "col-md-12 text-center">
+            <h1 id = "Waiting" style = "display:none;">Waiting for your partner...</h1>
+            <h1 id = "headerone" style = "display:none">Please select how many points to send to the bot:</h1>
+            <h1 id = "you" style = "display:none;">You sent:</h1>
+            <h1 id = "partner" style = "display:none;">The bot returned</h1>
+            <h1 id = "earnings" style = "display:none;">This round, you earned:</h1>
+         </div>
+      </div>
+      <div class = "row" id = "PGGrow" style = "display:none">
+         <div class = "col-md-12 text-center">
+            <div class="slidecontainer">
+               <label for = "Donation">Points</label>
+                  <input type="text" class="js-range-slider" name="my_range" value=""
+        	   data-min="0"
+        	   data-max="10"
+        	   data-from="5"/>
+            </div>
+         </div>
+      </div>
+      <div class = "row" id = "Submitbutton" style = "display:none">
+         <div class = "col-md-3">
+             <button onClick = "submitResponse($slider.prop('value'), 'Donation')" class="btn btn-success btn-lg" type="button" id="submission">Submit Choice</button>
+         </div>
+      </div>
+      <div class = "row" id = "OK" style = "display:none">
+         <div class = "col-md-3">
+             <button onClick = "advanceExperiment()" class="btn btn-success btn-lg" type="button">Okay</button>
+         </div>
+      </div>
+   </div>
+{% endblock %}
+{% block scripts %}
+    <script>
+        createAgent();
+        var $slider = $(".js-range-slider");
+        $(".js-range-slider").ionRangeSlider({
+        skin: "big"});
+    </script>
+{% endblock %}

@@ -1,0 +1,83 @@
+{% extends "layout.html" %}
+
+{% block body %}
+
+<div class="container">
+   <div class="row">
+      <div class="col-md-12 text-center">
+         <h1 style="font-size: 53px;">Part Two</h1>
+      </div>
+   </div>
+   <div class = "row"> 
+      <div class = "col-md-12 text-center"> 
+         <h1 id = "Socialinfo">Waiting for your partner...</h1>
+         <h1 id = "Whatdo" style = "display:none;">Placeholder</h1>
+      </div>
+   </div>
+</div>
+<div class = "container" id = "spitecont" style = "display:none;"> 
+   <div class = "row">
+      <div class = "col-md-12 text-center">
+         <h3>Will you change your partner's earnings?</h3>
+      </div>
+   </div>
+   <div class = "row">
+      <div class = "col-md-12 text-center">
+         <img src="../static/images/Outline.png" style="width:150px;height:200px;"> 
+      </div>
+   </div>
+   <div class = "row">
+      <div class = "col-md-12 text-center">
+         <div class="slidecontainer">
+            <label for = "Reduction">Change:</label>
+               <input type="text" class="js-range-slider" name="my_range" value=""
+        	   data-min="-10"
+        	   data-max="10"
+        	   data-from="0"/>
+         </div>
+      </div>
+    </div>   
+   <div class = "row">
+      <div class = "col-md-6 text-center">
+         <h4>Your final score will be:</h4>
+      </div>
+      <div class = "col-md-6 text-center">
+         <h4 id = "Change">Your partner's score will not change</h4>
+      </div>
+   </div>
+   <div class = "row">
+      <div class = "col-md-6 text-center">
+         <h4 id = "YourScore">Placeholder</h4>
+      </div>
+      <div class = "col-md-6 text-center">
+         <h4 id = "Score">Placeholder</h4>
+      </div>
+   </div>
+   <div class = "row" id = "Submitbutton">
+      <div class = "col-md-3">
+         <button onClick = "submitResponse($slider.prop('value'), 'Reduction')" class="btn btn-success btn-lg" type="button" id="submission">Submit Choice</button>
+      </div>
+   </div>
+</div>
+<div class = "container" id = "OK" style = "display:none;">
+  <div class = "row">
+     <div class = "col-md-3">
+        <button onClick = "advanceSpite();" class = "btn btn-lg btn-success" type = "button">Okay</button>
+     </div>
+   </div>
+</div>
+{% endblock %}
+{% block scripts %}
+    <script>
+       condition = dallinger.storage.get("Condition");
+       var $slider = $(".js-range-slider");
+          $(".js-range-slider").ionRangeSlider({
+          skin: "big"});
+       $slider.on("change", function(){
+          updatePoints($slider.prop('value'));
+       });
+       setTimeout(function(){
+          startSpite(condition);
+       }, 3000);
+    </script>
+{% endblock %}

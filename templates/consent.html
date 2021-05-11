@@ -1,0 +1,54 @@
+{% extends "base/consent.html" %}
+
+{% block body %}
+    <div class="main_div">
+        <noscript>
+            <h1>Warning: Javascript is not working on your browser</h1>
+            <p>The study will not work unless Javascript is enabled on your browser.</p>
+            <p>Please enable Javascript then refresh this page.<p>
+        </noscript>
+        <h1 class="text-center">We need your consent to proceed</h1>
+        <hr>
+        <div class="consent_div text-justify"><small>
+			{% block consent_text %}
+
+			<h5>Researchers and contact details:</h5>
+	
+			<p>Robin Watson (robin.o.watson@durham.ac.uk)</p>
+
+			<p>You are invited to take part in a study conducted by a postgraduate research student at the University of Durham, Robin Watson, supervised By Dr. Rachel Kendal, Dr. Jeremy Kendal and Dr. Julie Van-De-Vyver. This study has received ethical approval from the Department of Anthropology.</p>
+
+			<p>Before taking part, please read the following information carefully which will explain the purpose of the research and what is involved for you as a participant. If you would like any additional information, or there is anything which is unclear, please get in touch using the contact details above.</p>
+
+			<h5>What is the purpose of the study?</h5>
+
+			<p>The aim of this project is to better understand how human social behaviour might have evolved within group contexts.</p>
+
+			<h5>Do I have to take part?</h5>
+
+			<p>Your participation in this research is entirely voluntary. If you do agree to take part, you may withdraw from the study by closing the browser window. However, if you do so, you will be ineligible for compensation. Once you have completed the study and your responses have been recorded, it will not be possible for you to withdraw.</p>
+
+			<h5>What will happen to me if I take part?</h5>
+
+			<p>If you agree to take part, you will be asked to complete an online multiplayer experiment which should take around 5 minutes to complete. You will first play in a money game with a bot. Then, you may be asked to make a further one shot decision with your allocated partner. The score you earn in this game will affect the bonus you receive from this experiment. </p>
+
+		    <h5>What will happen to the data collected in this experiment?</h5>
+
+		    <p>During the study, no personally identifiable information will be collected at any point. Some limited demographic information will be collected at the end, which you may chose not to provide. All participants will be kept anonymous and it will be impossible to identify any individuals who have taken part. At the end of the study, the anonymised data may be shared with other researchers for legitimate research purposes. The anonymised results may also be used as part of a computer simulation.</p>
+
+			{% endblock consent_text %}
+            <hr>
+            <h4>Please click below to advance to the consent form</h4>
+            <br>
+			{% block consent_button %}
+    			<button type="button" class="btn btn-primary btn-lg" onClick="dallinger.allowExit(); dallinger.goToPage('consent2');" style="float: right;">Next</button>
+			{% endblock consent_button %}
+
+			{% block reject_button %}
+     			<button type="button" class="btn btn-danger btn-lg" onClick="self.close();" style="float: left;">No thanks (exit HIT)
+     			</button>
+			{% endblock reject_button %}
+        </div>
+    </div>
+{% endblock %}
+

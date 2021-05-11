@@ -1,0 +1,92 @@
+{% extends "layout.html" %}
+
+{% block body %}
+    <div class="main_div">
+        <h1>Submission form</h1>
+        <hr>
+
+	    <p>Please answer the following short questions about the experiment you just took part in. After which, you will be eligible for full payment plus your bonus depending on your score.</p>
+	    <p><strong>Please ensure that you click continue below once you are finshed, or else your response may not be recorded.</strong></p>
+
+	    <p>If you would like further information about the study, would like to know what the general findings are once all the data has been analysed, or have any other questions in general. Please contact the lead researcher for this project, Robin Watson [robin.o.watson@durham.ac.uk]</p>
+        </hr>
+    </div>
+    <div class="main_div">
+       <form>
+            	{% block replace_questions %}
+	                {% block questions %}
+	                {% endblock %}
+	                <div class="row question">
+	                    <div class="col-md-8">
+	                        On a scale of 1-10 (where 10 is perfectly understood), how would you rate your understanding of how the game worked?
+	                    </div>
+	                    <div class="col-md-4">
+	                        <select id="understanding" name="understanding">
+	                            <option value="10">10 - Perfectly understood</option>
+	                            <option value="9">9</option>
+	                            <option value="8">8</option>
+	                            <option value="7">7</option>
+	                            <option value="6">6</option>
+	                            <option value="5" SELECTED>5 - Mostly Understood</option>
+	                            <option value="4">4</option>
+	                            <option value="3">3</option>
+	                            <option value="2">2</option>
+	                            <option value="1">1 - Did not understand at all</option>
+	                        </select>
+	                    </div>
+	                </div>
+			<div class="row question">
+                            <div class="col-md-4">
+  			       What is your age? <input type="number" name="Age" min="1" max="100">
+                            </div>
+                        </div>
+			<div class="row question">
+                            <div class="col-md-4">
+                              <label for="comment">What is your gender?</label>
+                              <textarea class="form-control" rows="1" name="Gender"></textarea>
+                            </div>
+                        </div>
+                        <div class="row question">
+	                    <div class="col-md-4">
+	                        Which of these categories best describes you?
+	                    </div>
+	                    <div class="col-md-8">
+	                        <select id="Nationality" name="Nationality">
+	                            <option value="White">White (eg. American, Australian, Canadian, English, German, French, Polish, Spanish etc.)</option>
+	                            <option value="Hispanic">Hispanic, Latino (eg. Mexican, Puerto Rican, Cuban, Colombian etc.)</option>
+	                            <option value="Black">Black / African / Caribbean (eg. Nigerian, Ethiopian, Haitian, Jamaican etc.)</option>
+	                            <option value="Asian">Asian (eg. Japanese, Filipino, Indian, Pakistani, Chinese, Korean, Vietnamese etc.)</option>
+	                            <option value="Middle eastern or North African">Middle Eastern or North African (eg. Egyptian, Moroccan, Lebanese, Iranian, Algerian etc.)</option>
+	                            <option value="Native Hawaiian or Pacific Islander">Native Hawaiian or Pacific Islander (eg. Native Hawaiian, Samoan, Tongan, Fijian etc.)</option>
+	                            <option value="Native American / Alaskan">Native American / Alaskan (eg. Navajo nation Mayan, Aztec, Nome Eskimo etc.)</option>
+	                            <option value="Native Australian (eg. Aboriginal, Torres Strait islander)">Native Australian (eg. Aboriginal, Torres Strait islander)</option>
+	                            <option value="Other">Other</option>
+	                            <option value="Prefer not to say" Selected>Prefer not to say</option>
+	                        </select>
+	                    </div>
+	                </div>
+	            {% endblock %}
+            </form>
+        </div>
+        <hr>
+        <di class="instructionsnav">
+            <div class="row">
+                <div class="col-md-9">
+                </div>
+                <div class="col-md-3">
+                    <button type="button" id="submit-questionnaire" class="btn btn-primary btn-lg continue">Continue</button>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block scripts %}
+  <script type="text/javascript">
+    $(document).ready(function () {
+      $("#submit-questionnaire").click(function() {
+        dallinger.submitQuestionnaire();
+      });
+    });
+  </script>
+{% endblock %}

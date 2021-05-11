@@ -1,0 +1,45 @@
+{% extends "layout.html" %}
+
+{% block body %}
+   <div class = "container">
+      <div class = "row">
+         <div class = "col-md-12 text-center">
+            <h1>Part Two</h1>
+         </div>
+      </div>
+      <div class = "row">
+         <div class = "col-md-12 text-center">
+            <h3>Please answer the following questions</h3>
+         </div>
+      </div>
+      <div class = "row">
+         <div class = "col-md-12 text-center">
+            <p>Did you change your partner's earnings and if so, how?</p>
+            <textarea id="Change" class="form-control" rows="2"></textarea>
+            <p>Why did you make this decision?</p>
+            <textarea id="Decide" class="form-control" rows="2"></textarea>
+         </div>
+      </div>
+      <div id = "Social" class = "row">
+         <div class = "col-md-12 text-center">
+            <p>Was your decision affected by the behaviour of the other participants?</p>
+            <textarea id="Others" class="form-control" rows="2"></textarea>
+         </div>
+      </div>  
+      <div class="row">
+         <div class="col-md-10"></div>
+         <div class="col-md-2">
+            <button id = "submission" type="button" class="btn btn-success btn-lg" onClick="submitFeedback()">Submit responses</button>
+         </div>
+      </div>
+   </div>
+{% endblock %}
+
+{% block scripts %}
+    <script>
+      Condition = dallinger.storage.get("Condition");
+      if(Condition == "Asocial"){
+        $("#Social").hide(); 
+      }
+    </script>
+{% endblock %}
