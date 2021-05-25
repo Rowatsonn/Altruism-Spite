@@ -24,8 +24,11 @@
 {% block scripts %}
     <script>
       setTimeout(function(){
-        dallinger.goToPage('instructions/Instructions')
-      }, 12000);
-
+        $("#question").html("Starting Experiment");
+        $("#joinedpps").html("2");
+        setTimeout(function(){
+          dallinger.goToPage('instructions/Instructions')
+        }, 2000);
+      }, 10000);
     </script>
 {% endblock %}
