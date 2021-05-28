@@ -34,7 +34,7 @@ function submitResponse(response, type) {
       hideExperiment();
       setTimeout(function(){
         checkTransmit();
-      }, 2000); // Wait for the transmissions to all resolve and come through
+      }, 1500); // This code is a little risky. Watch to see if this causes trouble. Better solution would be some sort of check which recalls the function if it doesn't find anything
     } else {
       dallinger.allowExit();
       dallinger.goToPage('followup');
@@ -85,19 +85,19 @@ function processTransmit(transmissions){
 function showResults(pot, donation){
   Score = Score + parseInt(pot); 
   $("#Waiting").hide();
-  $("#you").html("You sent: " + myDonation);
+  $("#you").html("From your 10 points, you sent: " + myDonation);
   $("#you").show();
   $("#partner").html("The bot returned: " + donation);
   $("#partner").show();
-  $("#earnings").html("You earned: " + pot);
+  $("#earnings").html("This round, you scored: "+ pot);
   $("#earnings").show();
   $("#OK").show();
 }
 
-// Generates a random number within the specified range
-function getRndInteger(minimum, maximum) {
-return Math.floor(Math.random() * (maximum - minimum)) + minimum;
-}
+// // Generates a random number within the specified range
+// function getRndInteger(minimum, maximum) {
+// return Math.floor(Math.random() * (maximum - minimum)) + minimum;
+// }
 
 function advanceExperiment() {
   $("#partner").hide();
@@ -106,19 +106,21 @@ function advanceExperiment() {
   $("#you").hide();
   $("#Waiting").show();
   if(numTransmissions < 6){
-    setTimeout(function(){
     $("#Waiting").hide(); 
     $("#headerone").show();
     $("#PGGrow").show();
     $("#Submitbutton").show();
-    }, getRndInteger(2,6) * 1000); 
   } else {
     if(scoreShown == 0){
       $("#Waiting").hide();
       dallinger.storage.set("Score", Score);
       showScore();
     } else {
-      dallinger.goToPage('instructions/Interim');
+      $("#Waiting").html("Waiting for your partner to finish...");
+      $("#Waiting").show();
+      setTimeout(function(){
+        dallinger.goToPage('instructions/Interim');
+      }, 6000);
     }  
   }
 }
@@ -155,28 +157,31 @@ function allocatePartners(condition){
   $("#Instructions").hide();
   $("#Waiting").show();
   setTimeout(function(){
-    $("#Txt").html("You will act as the decider");
+    $("#Txt").html("You will act as the decider.");
+    $("#Decider").show();
     $("#Next").show();
+    $("#Sliderrow").show();
+    $("#Scorerow").show();
     if(condition !== "Asocial"){
       $("#social").show();
     }
-  }, 5000)
+  }, 4000)
 }
 
 function showNothing(){
-  $("#Whatdo").html("Not change their partner’s earnings");
+  $("#Whatdo").html("Not change their partner’s score");
   $("#Whatdo").show();
   $("#OK").show();
 }
 
 function showReduce(){
-  $("#Whatdo").html("Reduce their partner’s earnings");
+  $("#Whatdo").html("Reduce their partner’s score");
   $("#Whatdo").show();
   $("#OK").show();
 }
 
 function showAlt() {
-  $("#Whatdo").html("Increase their partner’s earnings");
+  $("#Whatdo").html("Increase their partner’s score");
   $("#Whatdo").show();
   $("#OK").show();
 }
@@ -190,13 +195,12 @@ function advanceSpite() {
 
 function startSpite(condition) {
   my_node_id = dallinger.storage.get("my_node_id");
-  $("#Score").html(0);
   Score = parseInt($("#Score").html());
   $("#YourScore").html(dallinger.storage.get("Score"));
   yourScore = parseInt($("#YourScore").html());
 
   if(condition.includes("Con")){
-    $("#Socialinfo").html("The majority of previous participants in this experiment chose to:")
+    $("#Socialinfo").html("The majority of previous participants in this game chose to:")
     if(condition.includes("spite")){
       showReduce();
     } else if(condition.includes("alt")){
@@ -206,7 +210,7 @@ function startSpite(condition) {
     }
 
   } else if(condition.includes("Top")){
-    $("#Socialinfo").html("The highest scoring participant in this experiment chose to:")
+    $("#Socialinfo").html("The highest scoring participant in previous games chose to:")
     if(condition.includes("spite")){
       showReduce();
     } else if(condition.includes("alt")){
