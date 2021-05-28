@@ -15,7 +15,7 @@ class Spite(Experiment):
         from . import models
 
         self.models = models
-        self.experiment_repeats = 2  # How many networks?
+        self.experiment_repeats = 1 # How many networks?
         self.initial_recruitment_size = self.experiment_repeats  # How many participants? (note, it is always 1 per group)
         self.known_classes = {
             "Donation": models.Donation,
@@ -55,7 +55,7 @@ class Spite(Experiment):
     def bonus(self, participant):
         """Calculate a participants bonus."""
         node = participant.nodes()[0]
-        return min(round(node.score_in_pgg * 0.0075, 2), 0.60)  # Each point is worth 0.0075 cents. Maximum of 1 dollar can be earned overall
+        return min(round(node.score_in_pgg * 0.005, 2), 0.60)  # Each point is worth 0.005 cents. Maximum of 1 dollar can be earned overall
 
     def info_post_request(self, node, info):
         """Depending on the info type, different things will happen here."""
