@@ -18,7 +18,7 @@
 <div class = "container" id = "spitecont" style = "display:none;"> 
    <div class = "row">
       <div class = "col-md-12 text-center">
-         <h3>Will you change your partner's earnings?</h3>
+         <h3>Will you change your partner's earnings? (remember, they cannot respond to your choice)</h3>
       </div>
    </div>
    <div class = "row">
@@ -26,33 +26,27 @@
          <img src="../static/images/Outline.png" style="width:150px;height:200px;"> 
       </div>
    </div>
-   <div class = "row">
-      <div class = "col-md-12 text-center">
+    <div class = "row">
+        <div class = "col-md-12 text-center">
          <div class="slidecontainer">
-            <label for = "Reduction">Change:</label>
+            <label for = "Reduction">Change to your partner's score:</label>
                <input type="text" class="js-range-slider" name="my_range" value=""
-        	   data-min="-10"
-        	   data-max="10"
-        	   data-from="0"/>
+             data-min="-10"
+             data-max="10"
+             data-from="0"/>
          </div>
+        </div>
       </div>
-    </div>   
-   <div class = "row">
-      <div class = "col-md-6 text-center">
+      <div class = "row">
+      <div class = "col-md-9 text-center">
          <h4>Your final score will be:</h4>
-      </div>
-      <div class = "col-md-6 text-center">
          <h4 id = "Change">Your partner's score will not change</h4>
       </div>
-   </div>
-   <div class = "row">
-      <div class = "col-md-6 text-center">
-         <h4 id = "YourScore">Placeholder</h4>
+      <div class = "col-md-3 text-center">
+        <h4 id = YourScore>0</h4>
+        <h4 id = Score>0</h4>
       </div>
-      <div class = "col-md-6 text-center">
-         <h4 id = "Score">Placeholder</h4>
-      </div>
-   </div>
+    </div> 
    <div class = "row" id = "Submitbutton">
       <div class = "col-md-3">
          <button onClick = "submitResponse($slider.prop('value'), 'Reduction')" class="btn btn-success btn-lg" type="button" id="submission">Submit Choice</button>
@@ -70,14 +64,20 @@
 {% block scripts %}
     <script>
        condition = dallinger.storage.get("Condition");
+       function byThree (n) {
+               var num = n * 3;
+               return num;
+           }
        var $slider = $(".js-range-slider");
           $(".js-range-slider").ionRangeSlider({
-          skin: "big"});
+          skin: "big",
+          hide_min_max: true,
+          prettify: byThree});
        $slider.on("change", function(){
           updatePoints($slider.prop('value'));
        });
-       setTimeout(function(){
-          startSpite(condition);
-       }, 3000);
+      setTimeout(function(){
+        startSpite(condition);
+      }, 2000);
     </script>
 {% endblock %}
