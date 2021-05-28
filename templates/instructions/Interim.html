@@ -10,15 +10,43 @@
       <div class = "row" id = "Waiting" style = "display:none">
         <div class = "col-md-12 text-center">
           <h2 id = "Txt">Randomly assigning roles, please wait a moment...</h2>
-          <h3 id = "social" style = "display:none">To help you make your decision, you will also be shown information about the behaviour of previous participants</h3>
         </div>
       </div>
+      <div class = "row" id = Decider style = "display:none">
+        <div class = "col-md-12 text-center">
+          <hr>
+          <h3>As the decider, you will be presented with a slider like the one shown below. You can <strong>increase</strong> your partners score by sliding to the <strong>right</strong> and <strong>decrease</strong> it by sliding it to the <strong>left</strong>.</h3>
+          <h3>For every 3 points you change your partner’s score by, your score will decrease by 1 point.</h3>
+          <h3 id = "social" style = "display:none">To help you make your decision, on the following page you will be shown information about what <strong>previous participants</strong> chose to do in this game.</h3>
+          <hr>
+        </div>
+      </div>
+      <div class = "row" id = Sliderrow style = "display:none">
+        <div class = "col-md-12 text-center">
+         <div class="slidecontainer">
+            <label for = "Reduction">Change to your partner's score:</label>
+               <input type="text" class="js-range-slider" name="my_range" value=""
+             data-min="-10"
+             data-max="10"
+             data-from="0"/>
+         </div>
+        </div>
+      </div> 
+    <div class = "row" id = Scorerow style = "display:none">
+      <div class = "col-md-9 text-center">
+         <h4>Your final score would be:</h4>
+         <h4 id = "Change">Your partner's score will not change</h4>
+      </div>
+      <div class = "col-md-3 text-center">
+        <h4 id = YourScore>0</h4>
+        <h4 id = Score>0</h4>
+      </div>
+    </div>
       <div class = "row" id = Instructions>
          <div class = "col-md-12 text-center">
             <hr>
-            <p>In this part of the game, you or your partner will be given the chance to change the other player's score for a small cost.</p>
-            <p>One player will be randomly chosen to make this decision.</p>
-            <p>Once this decision is made, <strong>the game is over</strong>. The other player will not be able to respond to their score being changed.</p>
+            <h3>In this part of the game, either you or your partner will be randomly given the opportunity to change the other player’s score for a small cost.</h3>
+            <h3>Once this decision is made, <strong>the game is over</strong>. The other player <strong>cannot</strong> respond to their score being changed.</h3>
             <hr>
          </div>
       </div>
@@ -38,7 +66,26 @@
 {% endblock %}
 {% block scripts %}
     <script>
+    my_node_id = dallinger.storage.get("my_node_id");
+    Score = parseInt($("#Score").html());
+    $("#YourScore").html(dallinger.storage.get("Score"));
+    yourScore = parseInt($("#YourScore").html());
+
         condition = randomiseCondition();
         dallinger.storage.set("Condition", condition);
+
+        function byThree (n) {
+               var num = n * 3;
+               return num;
+           }
+        var $slider = $(".js-range-slider");
+           $(".js-range-slider").ionRangeSlider({
+           skin: "big",
+           hide_min_max: true,
+           prettify: byThree
+         });
+         $slider.on("change", function(){
+            updatePoints($slider.prop('value'));
+         });  
     </script>
 {% endblock %}
