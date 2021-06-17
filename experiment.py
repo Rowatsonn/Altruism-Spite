@@ -15,7 +15,7 @@ class Spite(Experiment):
         from . import models
 
         self.models = models
-        self.experiment_repeats = 1 # How many networks?
+        self.experiment_repeats = 1# How many networks?
         self.initial_recruitment_size = self.experiment_repeats  # How many participants? (note, it is always 1 per group)
         self.known_classes = {
             "Donation": models.Donation,
