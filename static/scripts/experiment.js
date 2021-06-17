@@ -116,7 +116,7 @@ function advanceExperiment() {
       dallinger.storage.set("Score", Score);
       showScore();
     } else {
-      $("#Waiting").html("Waiting for your partner to finish...");
+      $("#Waiting").html("Waiting for the other participant to finish...");
       $("#Waiting").show();
       setTimeout(function(){
         dallinger.goToPage('instructions/Interim');
@@ -157,7 +157,7 @@ function allocatePartners(condition){
   $("#Instructions").hide();
   $("#Waiting").show();
   setTimeout(function(){
-    $("#Txt").html("You will act as the decider.");
+    $("#Txt").html("You have been assigned the <strong>decider</strong> role");
     $("#Decider").show();
     $("#Next").show();
     $("#Sliderrow").show();
@@ -169,37 +169,30 @@ function allocatePartners(condition){
 }
 
 function showNothing(){
-  $("#Whatdo").html("Not change their partner’s score");
+  $("#Whatdo").html("<strong>Not change</strong> their partner’s score");
   $("#Whatdo").show();
-  $("#OK").show();
 }
 
 function showReduce(){
-  $("#Whatdo").html("Reduce their partner’s score");
+  $("#Whatdo").html("<strong>Reduce</strong> their partner’s score");
   $("#Whatdo").show();
-  $("#OK").show();
 }
 
 function showAlt() {
-  $("#Whatdo").html("Increase their partner’s score");
+  $("#Whatdo").html("<strong>Increase</strong> their partner’s score");
   $("#Whatdo").show();
-  $("#OK").show();
-}
-
-function advanceSpite() {
-  $("#Socialinfo").hide();
-  $("#spitecont").show();
-  $("#OK").hide();
-  $("#Whatdo").hide();
 }
 
 function startSpite(condition) {
+  $("#Waiting").hide();
   my_node_id = dallinger.storage.get("my_node_id");
   Score = parseInt($("#Score").html());
   $("#YourScore").html(dallinger.storage.get("Score"));
   yourScore = parseInt($("#YourScore").html());
+  $("#spitecont").show();
 
   if(condition.includes("Con")){
+    $("#Socialinfo").show();
     $("#Socialinfo").html("The majority of previous participants in this game chose to:")
     if(condition.includes("spite")){
       showReduce();
@@ -210,6 +203,7 @@ function startSpite(condition) {
     }
 
   } else if(condition.includes("Top")){
+    $("#Socialinfo").show();
     $("#Socialinfo").html("The highest scoring participant in previous games chose to:")
     if(condition.includes("spite")){
       showReduce();
@@ -218,10 +212,6 @@ function startSpite(condition) {
     } else if(condition.includes("nothing")){
       showNothing();
     }
-
-  } else {
-    $("#Socialinfo").hide();
-    $("#spitecont").show();
   }
 }
 
@@ -250,14 +240,26 @@ function removeMe(){
   })
 }
 
+function pingButton(button){
+  // Gives the buttons functionality on followup
+  if(button == "Increase"){
+    $("#Change").html("Increased")
+  } else if(button == "Decrease"){
+    $("#Change").html("Decreased")
+  } else if(button == "No"){
+    $("#Change").html("Did not change")
+  }
+}
+
 function submitFeedback(){
   // Submits participants responses on the followup page
   $("#submission").hide();
   my_node_id = dallinger.storage.get("my_node_id");
+  Change = $("#Change").html()
   var resps = {
-    "Change" : $("#Change").val(),
-    "Decide" :  $("#Decide").val(),
-    "Others" :  $("#Others").val()
+    "Change" : Change,
+    "Decide" : $("#Decide").val(),
+    "Others" : $("#Others").val()
  };
  resps = JSON.stringify(resps); 
   dallinger.createInfo(my_node_id, {
