@@ -14,19 +14,34 @@
       </div>
       <div class = "row">
          <div class = "col-md-12 text-center">
-            <p>Did you change your partner's earnings and if so, how?</p>
-            <textarea id="Change" class="form-control" rows="2"></textarea>
-            <p>Why did you make this decision?</p>
+            <h4>Did you change your partner's earnings and if so, how?</h4>
+            <h5 id = "Change" style = "display:none">Did not answer</h5>
+         </div>
+      </div>
+      <div class = "row">
+         <div class = "col-md-4 text-center">
+            <button type = "button" class = "btn btn-light" onClick="pingButton('Increase')">Increased</button>
+         </div>
+         <div class = "col-md-4 text-center">
+            <button type = "button" class = "btn btn-light" onClick="pingButton('Decrease')">Decreased</button>
+         </div>
+         <div class = "col-md-4 text-center">
+            <button type = "button" class = "btn btn-light" onClick="pingButton('No')">Did not change</button>
+         </div>
+      </div>
+      <div class = "row">
+         <div class = "col-md-12 text-center">
+            <h4>Why did you make this decision?</h4>
             <textarea id="Decide" class="form-control" rows="2"></textarea>
          </div>
       </div>
       <div id = "Social" class = "row">
          <div class = "col-md-12 text-center">
-            <p>Was your decision affected by the behaviour of the other participants?</p>
+            <h4>Was your decision affected by the behaviour of the previous participants you were told about?</h4>
             <textarea id="Others" class="form-control" rows="2"></textarea>
          </div>
       </div>  
-      <div class="row">
+      <div class="row mt-5">
          <div class="col-md-10"></div>
          <div class="col-md-2">
             <button id = "submission" type="button" class="btn btn-success btn-lg" onClick="submitFeedback()">Submit responses</button>
@@ -41,5 +56,9 @@
       if(Condition == "Asocial"){
         $("#Social").hide(); 
       }
+     $('.btn').click(function() {
+     $('.btn').removeClass('btn-success').addClass('btn-light ');
+     $(this).addClass('btn-success').removeClass('btn-light ');
+     });
     </script>
 {% endblock %}
