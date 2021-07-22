@@ -1,6 +1,6 @@
 [Experiment]
 mode = sandbox
-auto_recruit = False
+auto_recruit = false
 webdriver_type = phantomjs
 
 [MTurk]
@@ -9,22 +9,22 @@ description = Investigating the evolution of social behaviour
 keywords = Psychology, Multiplayer
 base_payment = 0.35
 lifetime = 24
-duration = 0.1
-us_only = true
+duration = 0.5
+us_only = false
 approve_requirement = 95
 contact_email_on_error = robin.o.watson@durham.ac.uk
 browser_exclude_rule = MSIE, mobile, tablet
-group_name = pilot1
+group_name = Group1
 qualification_blacklist = 
 
 [Database]
 database_url = postgresql://postgres@localhost/dallinger
-database_size = hobby-dev
+database_size = standard-0
 
 [Server]
 dyno_type = hobby
 num_dynos_web = 1
 num_dynos_worker = 1
 host = 0.0.0.0
-clock_on = false
+clock_on = true
 logfile = -
