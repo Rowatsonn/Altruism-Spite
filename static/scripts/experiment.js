@@ -219,11 +219,11 @@ function updatePoints(value) {
   // Code for slider to update points displayed
   value = parseInt(value);
   if(value > 0){
-    $("#Change").html("Your partner's score will increase by:")
+    $("#Change").html("Your partner's score will <strong>increase<strong> by:")
   } else if(value < 0){
-    $("#Change").html("Your partner's score will decrease by:")
+    $("#Change").html("Your partner's score will <strong>decrease</strong> by:")
   } else if(value == 0){
-    $("#Change").html("Your partner's score will not change")
+    $("#Change").html("Your partner's score <strong>will not change</strong>")
   }
   $("#Score").html(Score + (Math.abs(value) * 3));
   $("#YourScore").html(yourScore - Math.abs(value));
