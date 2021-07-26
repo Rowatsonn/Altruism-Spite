@@ -19,6 +19,10 @@ class Probe(Node):
         return int(self.property1)
 
     @property
+    def original_score(self):
+        return int(self.property4)
+
+    @property
     def condition(self):
         return self.property2
 
@@ -29,6 +33,10 @@ class Probe(Node):
     @score_in_pgg.setter
     def score_in_pgg(self, val):
         self.property1 = int(val)
+
+    @original_score.setter
+    def original_score(self, val):
+        self.property4 = int(val)
 
     @condition.setter
     def condition(self, val):
@@ -54,6 +62,7 @@ class Pogtwo(Node):
         pog_donation = round(bound(((node_donation/2)*1.5) + random.randint(-3, 3), 0, 12),0)
         total_earnings = (10 - node_donation) + pog_donation
         node.score_in_pgg = node.score_in_pgg + (10 - node_donation) + pog_donation
+        node.original_score = node.score_in_pgg
 
         summary = {
             'total_earnings': total_earnings,
