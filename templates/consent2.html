@@ -31,7 +31,7 @@
 {% endblock consent_text %}
 
 {% block consent_button %}
-    <button type="button" class="btn btn-primary btn-lg" onClick="dallinger.allowExit();dallinger.goToPage('waiting');" style="float: right;">I agree</button>
+    <button type="button" class="btn btn-primary btn-lg" onClick="dallinger.allowExit(); window.location = '/waiting' + window.location.search;" style="float: right;">I agree</button>
 {% endblock consent_button %}
 
 {% block reject_button %}
