@@ -28,7 +28,7 @@
         $("#question").html("Starting Experiment...");
         $("#joinedpps").html("2");
         setTimeout(function(){
-          dallinger.goToPage('instructions/Instructions')
+          window.location = '/instructions/Instructions' + window.location.search
         }, 2000);
       }, 10000);
     </script>
